@@ -1,0 +1,8 @@
+# Default workspace to switch to after launching
+default_workspace=2
+
+# List of web pages to launch (one per line)
+# Format: workspace_number=url
+1=https://calendar.google.com/
+2=http://localhost:3000/
+3=https://open.spotify.com/

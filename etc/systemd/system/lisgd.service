@@ -1,0 +1,27 @@
+[Unit]
+Description=lisgd gesture daemon
+After=graphical.target
+Wants=graphical.target
+
+[Service]
+Type=simple
+# UID of the account that runs Sway (usually 1000 on Debian / Raspberry Pi OS; run `id -u`)
+User=1000
+Group=1000
+
+# Required for Wayland/Sway access (%U = User UID from User= below)
+Environment=XDG_RUNTIME_DIR=/run/user/%U
+Environment=XDG_SESSION_TYPE=wayland
+Environment=WAYLAND_DISPLAY=wayland-1
+
+# SWAYSOCK path can change; derive it at start (%h = home of User=)
+ExecStart=/bin/bash -lc 'export SWAYSOCK=$(ls /run/user/%U/sway-ipc.*.sock | head -n1); exec %h/.config/sway/start_lisgd.sh'
+
+Restart=on-failure
+RestartSec=2
+
+# Optional hardening (can remove while debugging)
+NoNewPrivileges=true
+
+[Install]
+WantedBy=multi-user.target

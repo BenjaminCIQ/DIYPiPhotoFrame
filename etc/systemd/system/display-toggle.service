@@ -1,0 +1,10 @@
+[Unit]
+Description=Toggle display inside Sway
+After=graphical-session.target
+
+[Service]
+Type=oneshot
+# UID of the account that runs Sway (`id -u`; %h is that user's home from passwd)
+User=1000
+Group=1000
+ExecStart=%h/.config/sway/toggle_display.sh
