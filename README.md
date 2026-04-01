@@ -10,7 +10,7 @@ A DIY digital photo frame built around a **Raspberry Pi 4**, a **GeeekPi 10.1″
 - **home-gallery** Node server for photos; optional **Nextcloud** + **photoframe-sync** timer for library sync
 - **lisgd** gestures (e.g. two-finger horizontal swipes for workspace switching via **wtype**)
 - **wvkbd** on-screen keyboard helpers for touch typing
-- **systemd** units for gesture daemon, scheduled display toggle, and sync
+- **systemd** units for **home-gallery**, gesture daemon, scheduled display toggle, and sync
 
 ## Hardware
 
@@ -41,7 +41,7 @@ Then follow **[setup.md](setup.md)** for packages, Nextcloud, home-gallery build
 | Path | Purpose |
 |------|---------|
 | `home/user/.config/sway/` | Sway config, kiosk launcher, helper scripts (deployed to `~/.config/sway/`) |
-| `etc/systemd/system/` | `lisgd`, `photoframe-sync@`, `display-toggle` services and timers |
+| `etc/systemd/system/` | `home-gallery`, `lisgd`, `photoframe-sync@`, `display-toggle` services and timers |
 | `scripts/install.sh` | Install configs and systemd units with correct UID/GID |
 | `setup.md` | Full setup notes (packages, Nextcloud, gallery, sync) |
 

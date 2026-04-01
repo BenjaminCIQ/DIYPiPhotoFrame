@@ -6,7 +6,7 @@
 #   ./scripts/install.sh              # ~/.config/sway only
 #   sudo ./scripts/install.sh --systemd # above + /etc/systemd/system/*.service|timer
 #   ./scripts/install.sh --dry-run    # print actions only
-# Optional: sudo ./scripts/install.sh --systemd --enable  # enable lisgd, timers, photoframe-sync.timer
+# Optional: sudo ./scripts/install.sh --systemd --enable  # enable home-gallery, lisgd, timers, photoframe-sync.timer
 
 set -euo pipefail
 
@@ -112,6 +112,7 @@ if [[ "$DO_SYSTEMD" -eq 1 ]]; then
   run systemctl daemon-reload
 
   if [[ "$DO_ENABLE" -eq 1 ]]; then
+    run systemctl enable --now home-gallery.service
     run systemctl enable --now lisgd.service
     run systemctl enable --now display-toggle.timer
     run systemctl enable --now photoframe-sync.timer

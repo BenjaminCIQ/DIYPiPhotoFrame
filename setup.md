@@ -1,6 +1,6 @@
 # Installed
 
-After cloning this repo on the Pi, run `./scripts/install.sh` to copy Sway files to `~/.config/sway/`. With `sudo ./scripts/install.sh --systemd`, unit files are installed under `/etc/systemd/system/` with `User=` / `Group=` set to your login UID/GID (uses `SUDO_USER` when invoked with sudo). Add `--enable` to enable `lisgd`, `display-toggle.timer`, and `photoframe-sync.timer`.
+After cloning this repo on the Pi, run `./scripts/install.sh` to copy Sway files to `~/.config/sway/`. With `sudo ./scripts/install.sh --systemd`, unit files are installed under `/etc/systemd/system/` with `User=` / `Group=` set to your login UID/GID (uses `SUDO_USER` when invoked with sudo). Add `--enable` to enable `home-gallery`, `lisgd`, `display-toggle.timer`, and `photoframe-sync.timer`.
 
 # Installed (packages)
 - sway
