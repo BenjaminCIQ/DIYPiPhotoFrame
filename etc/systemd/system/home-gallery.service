@@ -1,0 +1,19 @@
+[Unit]
+Description=Home Gallery Server
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+# UID of the account that owns ~/home-gallery and ~/.nvm (`id -u`; %h = that user's home from passwd)
+User=1000
+Group=1000
+WorkingDirectory=%h/home-gallery
+# Adjust the Node path if you use a different version or system-wide node (e.g. /usr/bin/node)
+ExecStart=%h/.nvm/versions/node/v20.19.5/bin/node %h/home-gallery/gallery.js run server --config %h/.config/home-gallery/gallery.config.yml
+Restart=always
+RestartSec=5
+Environment=NODE_ENV=production
+
+[Install]
+WantedBy=multi-user.target
