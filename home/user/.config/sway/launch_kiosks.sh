@@ -1,11 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# start home-gallery server (starts webapp as well)
-NODE="${NODE:-$HOME/.nvm/versions/node/v20.19.5/bin/node}"
-GALLERY_ROOT="${HOME_GALLERY_DIR:-$HOME/home-gallery}"
-"$NODE" "$GALLERY_ROOT/gallery.js" run server >> /tmp/home-gallery-log.txt 2>&1 &
-
 CONFIG_FILE="${XDG_CONFIG_HOME:-$HOME/.config}/sway/kiosk_launcher/config"
 BASE_USER_DIR="${XDG_CONFIG_HOME:-$HOME/.config}/sway/kiosk_launcher/chromium_profiles"
 
