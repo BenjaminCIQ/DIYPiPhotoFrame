@@ -1,0 +1,3 @@
+# Chromium kiosk profiles hold logged-in cookies (Google, Spotify)
+home/user/.config/sway/kiosk_launcher/chromium_profiles/
+home/user/.config/sway/session-env
