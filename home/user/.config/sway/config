@@ -62,7 +62,7 @@ include /etc/sway/config-vars.d/*
 # Read `man 5 sway-input` for more information about this section.
 input * {
 	xkb_layout us
-        xkb_variant workman
+        #xkb_variant workman
 }
 ### Key bindings
 #

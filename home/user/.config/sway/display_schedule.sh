@@ -21,7 +21,8 @@ fi
 
 now=$(date +%H:%M)
 if [[ ! "$now" < "$ON_TIME" && "$now" < "$OFF_TIME" ]]; then
-    swaymsg "output $OUTPUT power on" >/dev/null
+    # `enable` too: the old toggle (wlr-randr --off) disabled the output, which `power on` alone can't undo
+    swaymsg "output $OUTPUT enable power on" >/dev/null
     # Started via Sway so lisgd gets the session environment
     pgrep -x lisgd >/dev/null || swaymsg exec "$HOME/.config/sway/start_lisgd.sh" >/dev/null
 else
