@@ -240,13 +240,10 @@ bar {
     }
 }
 
-exec_always ~/.config/sway/wvkbd-auto.sh
+# `exec`, not `exec_always`: a config reload must not relaunch kiosks or duplicate daemons
+# Display on/off for the current time; also starts lisgd when the display is on
+exec ~/.config/sway/display_schedule.sh
 
-exec_always ~/.config/sway/start_lisgd.sh 
-
-exec_always ~/.config/sway/launch_kiosks.sh
+exec ~/.config/sway/launch_kiosks.sh
 
 include /etc/sway/config.d/*
-
-# Provide systemctl with sway session env variables so that the automatic screen shutoff commands work
-exec systemctl --user import-environment WAYLAND_DISPLAY SWAYSOCK DISPLAY XDG_RUNTIME_DIR XDG_SESSION_TYPE

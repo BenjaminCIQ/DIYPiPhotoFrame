@@ -1,0 +1,9 @@
+[Unit]
+Description=Set display on/off by schedule inside Sway
+
+[Service]
+Type=oneshot
+# UID of the account that runs Sway (`id -u`); install.sh rewrites User=/Group= and %h
+User=1000
+Group=1000
+ExecStart=%h/.config/sway/display_schedule.sh

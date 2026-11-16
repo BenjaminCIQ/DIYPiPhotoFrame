@@ -6,7 +6,7 @@
 #   ./scripts/install.sh              # ~/.config/sway only
 #   sudo ./scripts/install.sh --systemd # above + /etc/systemd/system/*.service|timer
 #   ./scripts/install.sh --dry-run    # print actions only
-# Optional: sudo ./scripts/install.sh --systemd --enable  # enable home-gallery, lisgd, timers, photoframe-sync.timer
+# Optional: sudo ./scripts/install.sh --systemd --enable  # enable home-gallery.service and display-schedule.timer
 
 set -euo pipefail
 
@@ -82,12 +82,15 @@ done
 rewrite_service() {
   local src="$1" dest="$2"
   if [[ "$DRY_RUN" -eq 1 ]]; then
-    echo "[dry-run] sed User/Group -> uid/gid $TARGET_UID/$TARGET_GID < $(basename "$src") > $(basename "$dest")"
+    echo "[dry-run] sed User/Group/%h/%U -> $TARGET_UID/$TARGET_GID/$TARGET_HOME < $(basename "$src") > $(basename "$dest")"
     return
   fi
+  # %h/%U in system units resolve to root's home/UID regardless of User=, so bake in the target user's
   sed -E \
     -e "s/^User=[0-9]+/User=$TARGET_UID/" \
     -e "s/^Group=[0-9]+/Group=$TARGET_GID/" \
+    -e "s|%h|$TARGET_HOME|g" \
+    -e "s|%U|$TARGET_UID|g" \
     "$src" >"$dest"
 }
 
@@ -96,6 +99,14 @@ if [[ "$DO_SYSTEMD" -eq 1 ]]; then
     echo "Use root/sudo for --systemd" >&2
     exit 1
   fi
+  # Units replaced by display-schedule.* and the Sway-started lisgd; leaving them would run lisgd twice
+  for old in lisgd.service display-toggle.timer display-toggle.service photoframe-sync.timer; do
+    if [[ -e "/etc/systemd/system/$old" ]]; then
+      run systemctl disable --now "$old"
+      run rm "/etc/systemd/system/$old"
+    fi
+  done
+
   UNIT_DIR="$REPO_ROOT/etc/systemd/system"
   for src in "$UNIT_DIR"/*.service; do
     [[ -e "$src" ]] || continue
@@ -113,9 +124,7 @@ if [[ "$DO_SYSTEMD" -eq 1 ]]; then
 
   if [[ "$DO_ENABLE" -eq 1 ]]; then
     run systemctl enable --now home-gallery.service
-    run systemctl enable --now lisgd.service
-    run systemctl enable --now display-toggle.timer
-    run systemctl enable --now photoframe-sync.timer
+    run systemctl enable --now display-schedule.timer
   fi
 fi
 

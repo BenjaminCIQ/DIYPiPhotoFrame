@@ -1,5 +1,5 @@
 #!/bin/bash
-# Wrapper that waits for the touch device then execs lisgd (so lisgd is the service main process).
+# Waits for the touch device then execs lisgd. Started by display_schedule.sh via `swaymsg exec`.
 
 # Optional: source Sway session env if present (for Wayland/swaymsg in gesture commands)
 if [ -f "${XDG_CONFIG_HOME:-$HOME/.config}/sway/session-env" ]; then
@@ -25,7 +25,7 @@ if [ -z "$DEVICE" ]; then
   exit 1
 fi
 
-# exec so this process is replaced by lisgd and systemd tracks lisgd
+# exec so this process becomes lisgd (display_schedule.sh stops it with `pkill -x lisgd`)
 exec lisgd -d "$DEVICE" \
   -g "2,RL,*,*,R,wtype -M logo -M ctrl -k right" \
   -g "2,LR,*,*,R,wtype -M logo -M ctrl -k left" \

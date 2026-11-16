@@ -1,6 +1,6 @@
 # Installed
 
-After cloning this repo on the Pi, run `./scripts/install.sh` to copy Sway files to `~/.config/sway/`. With `sudo ./scripts/install.sh --systemd`, unit files are installed under `/etc/systemd/system/` with `User=` / `Group=` set to your login UID/GID (uses `SUDO_USER` when invoked with sudo). Add `--enable` to enable `home-gallery`, `lisgd`, `display-toggle.timer`, and `photoframe-sync.timer`.
+After cloning this repo on the Pi, run `./scripts/install.sh` to copy Sway files to `~/.config/sway/`. With `sudo ./scripts/install.sh --systemd`, unit files are installed under `/etc/systemd/system/` with `User=` / `Group=` and `%h` set to your login user (uses `SUDO_USER` when invoked with sudo); retired units (`lisgd.service`, `display-toggle.*`, `photoframe-sync.timer`) are disabled and removed. Add `--enable` to enable `home-gallery.service` and `display-schedule.timer`. lisgd is started by Sway via `display_schedule.sh`.
 
 # Installed (packages)
 - sway
@@ -23,5 +23,5 @@ Add external_storage app in nextcloud and add drive to nextcloud using occ
 
 Now you can enable sharing of folders in photo drive, for example PublicUpload
 
-pull https://github.com/BenjaminCIQ/home-gallery, go to packages/folder-sync, install requirements, run setup.sh, check if sync is working by systemctl status photoframe-sync@.service and photoframe-sync.timer
-build proj, call ./gallery.js run server to test (will start automatically with sway config)
+pull https://github.com/BenjaminCIQ/home-gallery, go to packages/folder-sync, install requirements, run setup.sh
+build proj, call ./gallery.js run server to test (runs automatically via `home-gallery.service`)

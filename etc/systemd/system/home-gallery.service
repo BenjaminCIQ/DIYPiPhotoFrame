@@ -5,7 +5,7 @@ Wants=network-online.target
 
 [Service]
 Type=simple
-# UID of the account that owns ~/home-gallery and ~/.nvm (`id -u`; %h = that user's home from passwd)
+# UID of the account that owns ~/home-gallery and ~/.nvm (`id -u`); install.sh rewrites User=/Group= and %h
 User=1000
 Group=1000
 WorkingDirectory=%h/home-gallery

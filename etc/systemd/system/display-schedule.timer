@@ -1,0 +1,10 @@
+[Unit]
+Description=Apply display on/off schedule
+
+[Timer]
+# Keep in sync with ON_TIME/OFF_TIME in display_schedule.sh. No Persistent=: Sway applies the schedule at startup.
+OnCalendar=07:00
+OnCalendar=22:30
+
+[Install]
+WantedBy=timers.target
