@@ -26,7 +26,13 @@ include /etc/sway/config-vars.d/*
 # This is commented in Debian, because the Sway wallpaper files are in a separate
 # package `sway-backgrounds`. Installing this package drops a config file to
 # /etc/sway/config.d/
-# output * bg /usr/share/backgrounds/sway/Sway_Wallpaper_Blue_1920x1080.png fill
+# Black behind kiosks while they load, instead of the default grey
+output * bg #000000 solid_color
+
+# Photo frame look: no window borders/titles, cursor hidden after touch
+default_border none
+default_floating_border none
+seat * hide_cursor 1000
 #
 # Example configuration:
 #
@@ -222,15 +228,10 @@ bindsym $mod+r mode "resize"
     # Special key to take a screenshot with grim
     bindsym Print exec grim
 
-#
-# Status Bar:
-#
-# Read `man 5 sway-bar` for more information about this section.
+# Hidden on the frame; shown while Super is held, to see workspaces during maintenance
 bar {
     position top
-
-    # When the status_command prints a new line to stdout, swaybar updates.
-    # The default just shows the current date and time.
+    mode hide
     status_command while date +'%Y-%m-%d %X'; do sleep 1; done
 
     colors {
