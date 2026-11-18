@@ -27,8 +27,8 @@ fi
 
 # exec so this process becomes lisgd (display_schedule.sh stops it with `pkill -x lisgd`)
 exec lisgd -d "$DEVICE" \
-  -g "2,RL,*,*,R,wtype -M logo -M ctrl -k right" \
-  -g "2,LR,*,*,R,wtype -M logo -M ctrl -k left" \
+  -g "2,RL,*,*,R,swaymsg workspace next" \
+  -g "2,LR,*,*,R,swaymsg workspace prev" \
   -g "3,DU,*,*,R,swaymsg exec '~/.config/sway/settings-toggle.sh'" \
   -g "3,UD,*,*,R,swaymsg exec '~/.config/sway/settings-toggle.sh'" \
   -g "2,DU,*,*,R,swaymsg exec '~/.config/sway/wvkbd-toggle.sh'" \

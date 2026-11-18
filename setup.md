@@ -6,7 +6,6 @@ After cloning this repo on the Pi, run `./scripts/install.sh` to copy Sway files
 - sway
 - nextcloud
 - lisgd (advanced touch actions)
-- wtype (keypress executor)
 - wbkbd
 - Thunar
 - pavucontrol (sound)

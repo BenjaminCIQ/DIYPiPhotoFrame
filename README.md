@@ -8,7 +8,7 @@ A DIY digital photo frame built around a **Raspberry Pi 4**, a **GeeekPi 10.1″
 
 - Multi-workspace **Chromium kiosk** sessions (calendar, local gallery, Spotify, etc.) via `launch_kiosks.sh` and `kiosk_launcher/config`
 - **home-gallery** Node server for photos (also handles library sync); optional **Nextcloud** for uploads
-- **lisgd** gestures (e.g. two-finger horizontal swipes for workspace switching via **wtype**)
+- **lisgd** gestures (e.g. two-finger horizontal swipes for workspace switching via `swaymsg`)
 - **wvkbd** on-screen keyboard helpers for touch typing
 - **systemd** units for **home-gallery** and the scheduled display on/off
 
