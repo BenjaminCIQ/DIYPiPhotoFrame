@@ -30,6 +30,9 @@ grep -v '^#' "$CONFIG_FILE" | grep '=' | while IFS='=' read -r workspace url; do
 
     user_data_dir="${BASE_USER_DIR}/ws${workspace}"
     mkdir -p "$user_data_dir"
+    # Stale locks survive power loss; after reboot the stored PID can be another kiosk's Chromium.
+    # Safe to remove: the pgrep guard above ensures no kiosk is running.
+    rm -f "$user_data_dir"/Singleton{Lock,Socket,Cookie}
 
     before=$(window_ids)
     chromium \
