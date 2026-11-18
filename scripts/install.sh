@@ -117,8 +117,8 @@ if [[ "$DO_SYSTEMD" -eq 1 ]]; then
   for src in "$UNIT_DIR"/*.timer; do
     [[ -e "$src" ]] || continue
     base="$(basename "$src")"
-    run cp -a "$src" "/etc/systemd/system/$base"
-    run chmod 644 "/etc/systemd/system/$base"
+    # Not cp -a: that would keep the checkout user's ownership on a system unit
+    run install -m 644 "$src" "/etc/systemd/system/$base"
   done
   run systemctl daemon-reload
 
